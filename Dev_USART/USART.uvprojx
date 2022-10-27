@@ -384,14 +384,19 @@
           <GroupName>MesDrivers</GroupName>
           <Files>
             <File>
+              <FileName>MyTimer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MesProjetsSTM32\MesDrivers\Source\MyTimer.c</FilePath>
+            </File>
+            <File>
               <FileName>Driver_GPIO.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\MesDrivers\Source\Driver_GPIO.c</FilePath>
+              <FilePath>..\..\..\MesProjetsSTM32\MesDrivers\Source\Driver_GPIO.c</FilePath>
             </File>
             <File>
               <FileName>MyUSART.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\MesDrivers\Source\MyUSART.c</FilePath>
+              <FilePath>..\Drivers\Source\MyUSART.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -746,7 +751,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\Include;..\MesDrivers\Include</IncludePath>
+              <IncludePath>.\Include;..\Drivers\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -791,14 +796,19 @@
           <GroupName>MesDrivers</GroupName>
           <Files>
             <File>
+              <FileName>MyTimer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MesProjetsSTM32\MesDrivers\Source\MyTimer.c</FilePath>
+            </File>
+            <File>
               <FileName>Driver_GPIO.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\MesDrivers\Source\Driver_GPIO.c</FilePath>
+              <FilePath>..\..\..\MesProjetsSTM32\MesDrivers\Source\Driver_GPIO.c</FilePath>
             </File>
             <File>
               <FileName>MyUSART.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\MesDrivers\Source\MyUSART.c</FilePath>
+              <FilePath>..\Drivers\Source\MyUSART.c</FilePath>
             </File>
           </Files>
         </Group>

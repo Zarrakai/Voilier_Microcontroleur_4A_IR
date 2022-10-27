@@ -1,39 +1,50 @@
 #include "MyUSART.h"
 
-
-
-void Init_Myusart(USART_TypeDef* USARTx){
+void USART_config(USART_TypeDef* USARTx){
 	
 	if(USARTx == USART1){
 		RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
+		USARTx->BRR = 0x1D4C;												 // Baud rate : USARTDIV = 72000000/(16*9600), APB2 with 72MHz
 	}
-	else if(USARTx == USART3){
-		RCC->APB1ENR |= RCC_APB1ENR_USART3EN;
-	}
-	else{
-		//usaert 2 : interrupt !!
-	}
-	USARTx->CR1 |= USART_CR1_UE;
-	USARTx->CR2 |= USART_CR1_TE;
-	USARTx->CR2 |= USART_CR1_RE;
+	else
+		if(USARTx == USART3){
+			RCC->APB1ENR |= RCC_APB1ENR_USART3EN;
+			USARTx->BRR = (uint16_t)0xEA177;						// Baud rate : USARTDIV = 36000000/(16*9600), APB1 with 36MHz
+		}
+		else{
+			//uart 2 : interrupt !!
+		}
+  
+	USARTx->CR1 = 0x00;														// Clear ALL
+	USARTx->CR1 |= USART_CR1_UE;									// Enable UART -> UA=1
+	
+	USARTx->CR1 |= ~USART_CR1_M ;									// 8 bits for word length, M=0
+	
+	USARTx->CR2 |= USART_CR1_TE; 									// Enable Transmitter, TE=1
+  USARTx->CR2 |= USART_CR1_RE;									// Enable the Receiver, RE=1
 }
 
-void transsmision_cts(USART_TypeDef* USART, int cts){
-	if(cts == 1){
-		USART->CR3 |= USART_CR3_CTSE;
+
+int DR_not_empty(USART_TypeDef* USARTx){
+	if (USARTx->SR & USART_SR_RXNE){
+		return 1;
 	}
-	if(cts == 0){
-		USART->CR3 &= ~USART_CR3_CTSE;
-	}
+	return 0;
 }
 
-void reception_rts(USART_TypeDef* USART, int rts){
-	if(rts == 1){
-		USART->CR3 |= USART_CR3_RTSE;
+
+int data_is_shifted(USART_TypeDef* USARTx){
+	if (USARTx->SR & USART_SR_TXE){
+		return 1;
 	}
-	if(rts == 0){
-		USART->CR3 &= ~USART_CR3_RTSE;
-	}
+	return 0;
 }
 
-//done
+
+int data_is_transmitted(USART_TypeDef* USARTx){
+	if (USARTx->SR & USART_SR_TC){
+		return 1;
+	}
+	return 0;
+}
+
